@@ -1,0 +1,60 @@
+{
+  "name": "gis-stripe-simple",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "check": "next lint && tsc --noEmit",
+    "dev": "next dev --turbo",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "preview": "next build && next start",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^4.10.0",
+    "@t3-oss/env-nextjs": "^0.10.1",
+    "@tanstack/react-query": "^5.50.0",
+    "@trpc/client": "^11.0.0-rc.446",
+    "@trpc/react-query": "^11.0.0-rc.446",
+    "@trpc/server": "^11.0.0-rc.446",
+    "geist": "^1.3.0",
+    "lodash": "^4.17.21",
+    "lorem-ipsum": "^2.0.8",
+    "nekonya.js": "^1.2.8",
+    "next": "^15.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
+    "server-only": "^0.0.1",
+    "stripe": "^17.3.1",
+    "superjson": "^2.2.1",
+    "zod": "^3.23.3"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.10",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
+    "@typescript-eslint/parser": "^8.1.0",
+    "daisyui": "^4.12.14",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.0.1",
+    "postcss": "^8.4.39",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "react-daisyui": "^5.0.5",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.5.3"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.38.1"
+  },
+  "packageManager": "yarn@1.22.22"
+}

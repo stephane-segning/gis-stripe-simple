@@ -1,0 +1,1 @@
+# Stripe simple payment integration
