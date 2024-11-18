@@ -24,7 +24,7 @@ export const stripeRouter = createTRPCRouter({
     .output(z.object({ sessionId: z.string() }))
     .mutation(async ({ input }) => {
       const images = input.product_images
-        ? [...input.product_images]
+        ? input.product_images
         : await Promise.all([neko(), kiss(), kitsune()]);
 
       const publicUrl = new URL(env.NEXT_PUBLIC_APP_URL);

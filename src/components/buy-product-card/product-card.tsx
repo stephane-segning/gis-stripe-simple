@@ -27,16 +27,14 @@ export default function BuyProductCard(props: BuyProductCardProps) {
   const startPurchase = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const data = await mutateAsync(props);
+      const { sessionId } = await mutateAsync(props);
       const stripe = await getStripe();
       if (!stripe) {
         console.error("Could not initialize stripe");
         return;
       }
 
-      await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
+      await stripe.redirectToCheckout({ sessionId });
     },
     [props, mutateAsync],
   );
