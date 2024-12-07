@@ -73,4 +73,55 @@ export const stripeRouter = createTRPCRouter({
         sessionId: session.id,
       };
     }),
+
+  getStripeTheme: publicProcedure
+    .input(
+      z.object({
+        vendorId: z.string(),
+      }),
+    )
+    .output(
+      z.object({
+        theme: z.string(),
+        variables: z.object({}).optional(),
+      }),
+    )
+    .query(async ({ input: { vendorId } }) => {
+      return {
+        theme: "flat",
+        labels: "floating",
+
+        variables: {
+          colorPrimary: "#bd93f9",
+          colorBackground: "#282a36",
+          colorText: "#f8f8f2",
+          colorDanger: "#ff5555",
+        },
+      };
+    }),
+
+  createPaymentIntent: publicProcedure
+    .input(
+      z.object({
+        amount: z.number(),
+        currency: z.string(),
+        stripeAccountId: z.string(),
+        redirectPath: z.string().optional(),
+      }),
+    )
+    .output(z.object({ client_secret: z.string() }))
+    .mutation(async ({ input }) => {
+      const params: Stripe.PaymentIntentCreateParams = {
+        amount: input.amount,
+        currency: input.currency,
+      };
+
+      const intent = await stripe.paymentIntents.create(params, {
+        stripeAccount: input.stripeAccountId,
+      });
+
+      return {
+        client_secret: intent.client_secret!,
+      };
+    }),
 });
