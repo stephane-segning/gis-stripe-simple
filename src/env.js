@@ -9,7 +9,7 @@ import { z } from "zod";
  */
 function alternatives(...values) {
   for (const value of values) {
-    if (value) {
+    if (value && value.length > 0) {
       return value;
     }
   }
@@ -44,9 +44,9 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: alternatives(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_LIVE, process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
-    NEXT_PUBLIC_APP_URL: alternatives(process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_VERCEL_URL),
-    STRIPE_SECRET_KEY: alternatives(process.env.STRIPE_SECRET_KEY ?? process.env.STRIPE_SECRET_KEY_LIVE),
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: alternatives(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_TEST, process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_LIVE),
+    NEXT_PUBLIC_APP_URL: alternatives(process.env.NEXT_PUBLIC_SITE_URL, process.env.NEXT_PUBLIC_VERCEL_URL),
+    STRIPE_SECRET_KEY: alternatives(process.env.STRIPE_SECRET_KEY_TEST, process.env.STRIPE_SECRET_KEY_LIVE),
     STRIPE_APP_INFO_NAME: alternatives(process.env.STRIPE_APP_INFO_NAME),
     STRIPE_APP_INFO_VERSION: alternatives(process.env.STRIPE_APP_INFO_NAME),
   },

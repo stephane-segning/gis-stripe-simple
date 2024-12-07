@@ -1,6 +1,7 @@
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { env } from '@ss/env';
 
+// Resolve stripe promise once and return it always
 let stripePromise: Promise<Stripe | null>;
 
 export const getStripe = () => {
