@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@ss/server/api/trpc";
-import Stripe from "stripe";
+import type Stripe from "stripe";
 import { stripe } from "@ss/stripe/config";
 import { env } from "@ss/env";
 import { kiss, kitsune, neko } from "nekonya.js";
@@ -77,7 +77,7 @@ export const stripeRouter = createTRPCRouter({
   getStripeTheme: publicProcedure
     .input(
       z.object({
-        vendorId: z.string(),
+        stripeAccountId: z.string(),
       }),
     )
     .output(
@@ -86,7 +86,7 @@ export const stripeRouter = createTRPCRouter({
         variables: z.object({}).optional(),
       }),
     )
-    .query(async ({ input: { vendorId } }) => {
+    .query(async ({ input: { stripeAccountId } }) => {
       return {
         theme: "flat",
         labels: "floating",

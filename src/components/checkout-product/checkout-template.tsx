@@ -12,7 +12,7 @@ export function CheckoutTemplate({ children }: PropsWithChildren) {
   const stripeAccountId = "acct_1QTPel82yD5OLCM6";
 
   const { isError, run, secret } = usePaymentIntent({
-    amount: 20,
+    amount: 20_00,
     currency: "EUR",
     stripeAccountId,
   });
@@ -28,7 +28,7 @@ export function CheckoutTemplate({ children }: PropsWithChildren) {
   }
 
   return (
-    <StripeProvider vendorId={stripeAccountId} clientSecret={secret}>
+    <StripeProvider stripeAccountId={stripeAccountId} clientSecret={secret}>
       {children}
     </StripeProvider>
   );

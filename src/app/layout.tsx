@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "@ss/trpc/react";
 import { Toaster } from "react-hot-toast";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
   title: "Stripe Demo",
@@ -12,9 +13,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
