@@ -8,7 +8,6 @@ export function StripeCustomElement() {
     <form className='flex flex-col gap-4'>
       <PaymentElement />
       <Button fullWidth color='primary' type="submit">Submit</Button>
-      <Button fullWidth color='error' type="reset">Reset</Button>
     </form>
   );
 }

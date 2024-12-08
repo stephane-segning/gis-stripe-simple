@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 export default async function CheckoutPage() {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 md:px-0">
       <Suspense fallback={<div>Loading...</div>}>
         <CheckoutTemplate>
           <div className="flex flex-col justify-between gap-4 md:flex-row">

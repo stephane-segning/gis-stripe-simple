@@ -99,7 +99,7 @@ export const stripeRouter = createTRPCRouter({
     )
     .query(async ({ input: { stripeAccountId } }) => {
       return {
-        theme: "night",
+        theme: "flat",
         labels: "floating",
         variables: {
           colorPrimary: "#bd93f9",
