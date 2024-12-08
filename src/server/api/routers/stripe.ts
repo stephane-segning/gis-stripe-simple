@@ -67,7 +67,9 @@ export const stripeRouter = createTRPCRouter({
         },
       };
 
-      const session = await stripe.checkout.sessions.create(params);
+      const session = await stripe.checkout.sessions.create(params, {
+        stripeAccount: env.MAIN_STRIPE_ACCOUNT_ID,
+      });
 
       return {
         sessionId: session.id,
@@ -106,7 +108,6 @@ export const stripeRouter = createTRPCRouter({
         amount: z.number(),
         currency: z.string(),
         stripeAccountId: z.string(),
-        redirectPath: z.string().optional(),
       }),
     )
     .output(z.object({ client_secret: z.string() }))

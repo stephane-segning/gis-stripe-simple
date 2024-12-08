@@ -2,20 +2,23 @@ import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { env } from "@ss/env";
 
 // Resolve stripe promise once and return it always
-const stripePromises: Record<string, Promise<Stripe | null>> = {};
+const sCache: Record<string, Promise<Stripe | null>> = {};
 
 export const getStripe = (stripeAccountId = "default") => {
-  let stripePromise = stripePromises[stripeAccountId];
-  if (!stripePromise) {
+  let found = sCache[stripeAccountId];
+  if (!found) {
     switch (stripeAccountId) {
       case "default":
-        stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+        found = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
+          stripeAccount: env.NEXT_PUBLIC_MAIN_STRIPE_ACCOUNT_ID,
+        });
       default:
-        stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
+        found = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
           stripeAccount: stripeAccountId,
         });
     }
+    sCache[stripeAccountId] = found;
   }
 
-  return stripePromise;
+  return found;
 };

@@ -36,6 +36,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
     NEXT_PUBLIC_APP_URL: z.string().optional().default("http://localhost:3000"),
+    NEXT_PUBLIC_MAIN_STRIPE_ACCOUNT_ID: z.string().optional(),
   },
 
   /**
@@ -49,6 +50,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: alternatives(process.env.STRIPE_SECRET_KEY_TEST, process.env.STRIPE_SECRET_KEY_LIVE),
     STRIPE_APP_INFO_NAME: alternatives(process.env.STRIPE_APP_INFO_NAME),
     STRIPE_APP_INFO_VERSION: alternatives(process.env.STRIPE_APP_INFO_NAME),
+    NEXT_PUBLIC_MAIN_STRIPE_ACCOUNT_ID: alternatives(process.env.NEXT_PUBLIC_MAIN_STRIPE_ACCOUNT_ID),
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

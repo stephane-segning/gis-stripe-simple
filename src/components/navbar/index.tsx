@@ -1,5 +1,5 @@
 "use client";
-import { Button, Link, Navbar } from "react-daisyui";
+import { Button, Navbar } from "react-daisyui";
 import { default as NextLink } from "next/link";
 import { Menu } from "react-feather";
 
@@ -9,11 +9,11 @@ export function AppNav() {
       <Navbar className="container mx-auto">
         <Navbar.Start>Test stripe</Navbar.Start>
         <Navbar.Center className="gap-4">
-          <NextLink href="/">
-            <Link>Home</Link>
+          <NextLink href="/" className="btn btn-link">
+            <span>Home</span>
           </NextLink>
-          <NextLink href="/checkout">
-            <Link>Checkout</Link>
+          <NextLink href="/checkout" className="btn btn-link">
+            <span>Checkout</span>
           </NextLink>
         </Navbar.Center>
         <Navbar.End>
