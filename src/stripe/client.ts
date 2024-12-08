@@ -1,10 +1,10 @@
-import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { loadStripe, type Stripe } from "@stripe/stripe-js";
 import { env } from "@ss/env";
 
 // Resolve stripe promise once and return it always
 const sCache: Record<string, Promise<Stripe | null>> = {};
 
-export const getStripe = (stripeAccountId = "default") => {
+export const getStripe = (stripeAccountId = "default"): Promise<Stripe | null> => {
   let found = sCache[stripeAccountId];
   if (!found) {
     switch (stripeAccountId) {
@@ -20,5 +20,5 @@ export const getStripe = (stripeAccountId = "default") => {
     sCache[stripeAccountId] = found;
   }
 
-  return found;
+  return found as Promise<Stripe>;
 };

@@ -9,8 +9,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "3xl": "2rem"
+      },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: ["Louis George Cafe", ...fontFamily.sans],
+        serif: ["Louis George Cafe", ...fontFamily.serif],
+        mono: ["Louis George Cafe", ...fontFamily.mono]
       },
     },
   },

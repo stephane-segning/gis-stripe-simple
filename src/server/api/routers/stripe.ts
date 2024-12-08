@@ -68,7 +68,7 @@ export const stripeRouter = createTRPCRouter({
       };
 
       const session = await stripe.checkout.sessions.create(params, {
-        stripeAccount: env.MAIN_STRIPE_ACCOUNT_ID,
+        stripeAccount: env.NEXT_PUBLIC_MAIN_STRIPE_ACCOUNT_ID,
       });
 
       return {
@@ -84,20 +84,31 @@ export const stripeRouter = createTRPCRouter({
     )
     .output(
       z.object({
-        theme: z.string(),
-        variables: z.object({}).optional(),
+        theme: z.enum(["stripe", "night", "flat"]),
+        labels: z.enum(['above', "floating"]),
+        variables: z.object({
+          colorPrimary: z.string(),
+          colorBackground: z.string(),
+          colorText: z.string(),
+          colorDanger: z.string(),
+          fontFamily: z.string(),
+          spacingUnit: z.string(),
+          borderRadius: z.string(),
+        }).optional(),
       }),
     )
     .query(async ({ input: { stripeAccountId } }) => {
       return {
-        theme: "flat",
+        theme: "night",
         labels: "floating",
-
         variables: {
           colorPrimary: "#bd93f9",
           colorBackground: "#282a36",
           colorText: "#f8f8f2",
           colorDanger: "#ff5555",
+          fontFamily: 'Louis George Cafe, Ideal Sans, system-ui, sans-serif',
+          spacingUnit: '0.25rem',
+          borderRadius: '16px',
         },
       };
     }),

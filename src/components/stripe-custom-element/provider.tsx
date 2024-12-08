@@ -24,7 +24,7 @@ export function StripeProvider({
   return (
     <Elements
       stripe={getStripe(stripeAccountId)}
-      options={{ clientSecret, ...data }}
+      options={{ clientSecret, appearance: data }}
     >
       {children}
     </Elements>
