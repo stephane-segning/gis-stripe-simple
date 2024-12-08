@@ -1,12 +1,20 @@
-import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { env } from '@ss/env';
+import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { env } from "@ss/env";
 
 // Resolve stripe promise once and return it always
-let stripePromise: Promise<Stripe | null>;
+const stripePromises: Record<string, Promise<Stripe | null>> = {};
 
-export const getStripe = () => {
+export const getStripe = (stripeAccountId = "default") => {
+  let stripePromise = stripePromises[stripeAccountId];
   if (!stripePromise) {
-    stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    switch (stripeAccountId) {
+      case "default":
+        stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+      default:
+        stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
+          stripeAccount: stripeAccountId,
+        });
+    }
   }
 
   return stripePromise;

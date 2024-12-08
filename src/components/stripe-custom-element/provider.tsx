@@ -7,20 +7,25 @@ import { api } from "@ss/trpc/react";
 
 export interface StripeProviderProps {
   clientSecret: string;
-  vendorId: string;
+  stripeAccountId: string;
 }
 
 export function StripeProvider({
   children,
-  vendorId,
+  stripeAccountId,
   clientSecret,
 }: PropsWithChildren<StripeProviderProps>) {
-  const [data] = api.stripe.getStripeTheme.useSuspenseQuery({ vendorId });
+  const [data] = api.stripe.getStripeTheme.useSuspenseQuery({
+    stripeAccountId,
+  });
   if (!data) {
     return <div>Oops! Could not find the theme!</div>;
   }
   return (
-    <Elements stripe={getStripe()} options={{ clientSecret, ...data }}>
+    <Elements
+      stripe={getStripe(stripeAccountId)}
+      options={{ clientSecret, ...data }}
+    >
       {children}
     </Elements>
   );
